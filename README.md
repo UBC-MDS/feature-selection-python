@@ -23,7 +23,7 @@ In this package, four functions are included to lead you with feature selection:
 - TO DESCRIBE
 
 #### Variance Thresholding  
-- TO DESCRIBE
+Select features based on their variances. A threshold, typically a low one, would be set so that any feature with a variance lower than that would be filtered out. Since this algorithm only looks at features without their outputs, it could be used to do feature selection on data related to unsupervised learning.
 
 #### Simulated Annealing  
 - TO DESCRIBE
