@@ -3,12 +3,14 @@
 
 ## Contributors
 
+
 |Name |GitHub | E-mail |
 |-----|-------|--------|
 |Ying Jing -Jacky- Ho |[jackyho112](https://github.com/jackyho112)|<jackyho112dev@gmail.com>|
 |Ryan Homer |[ryanhomer](https://github.com/ryanhomer)|<ryan.homer@alumni.ubc.ca>|
 |Derek Kruszewski |[dkruszew](https://github.com/dkruszew)|<derek.j.kruszewski@gmail.com>|
 |Victor Cuspinera |[vcuspinera](https://github.com/vcuspinera)|<vcuspinera@gmail.com>|
+
 
 
 ## Contributing
