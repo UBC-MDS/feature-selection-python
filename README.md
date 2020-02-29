@@ -6,22 +6,18 @@
 
 Feature selection for scikit-learn estimators
 
-### Contributors:
-|Name|GitHub|
-|----|-------------|
-|Ying Jing -Jacky- Ho |[jackyho112](https://github.com/jackyho112)|
-|Ryan Homer |[ryanhomer](https://github.com/ryanhomer)|
-|Derek Kruszewski |[dkruszew](https://github.com/dkruszew)|
-|Victor Cuspinera |[vcuspinera](https://github.com/vcuspinera)|
-
 ### Overview:
-If you have face a database with so many features that while working it gets messy, a good idea is to select some of these features for your model. However, this is not a trivial question, and to help you with this task, we have created the `feature-selection` package in **python**.
+If you have encountered a database with so many features, that while working on it and gets messy, a good idea is to approach this problem by selecting only some of these features for your model. Feature seletion will reduce complexity, reduce the time when training an algorithm, and improve the accuracy of your model (if we select them wisely). However, this is not a trivial question. 
+
+To help you out performing this task, we have created the **feature-selection** package in `python`.
+
+If you are interested in a similar feature selection package for `R`, click [here](https://github.com/UBC-MDS/feature-selection-r).
 
 ### Feature description:
-In this package, four functions are included to lead with feature selection:
+In this package, four functions are included to lead you with feature selection:
 
 #### Forward
-- TO DESCRIBE
+- Interative algorithm that starts as an empty model, add features that improves the accuracy of the model, and stops when the accuracy doesn't improve anymore.  
 
 #### Backward
 - TO DESCRIBE
