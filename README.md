@@ -6,6 +6,28 @@
 
 Feature selection for scikit-learn estimators
 
+### Overview:
+If you have encountered a database with a myriad number of features, which could be messy to work on, a good idea is to approach this problem by selecting only some of these features for your model. Feature selection will reduce complexity, reduce the time when training an algorithm, and improve the accuracy of your model (if we select them wisely). However, this is not a trivial task. 
+
+To help you out performing this task, we have created the **feature-selection** package in `python`.
+
+If you are interested in a similar feature selection package for `R`, click [here](https://github.com/UBC-MDS/feature-selection-r).
+
+### Feature description:
+In this package, four functions are included to lead you with feature selection:
+
+#### Forward
+- Function that use the forward algorithm to select the number of features in a model. This iterative algorithm starts as an empty model, and add the variable with the highest improve in the accuracy of the model. The process then is iteratively repeated selecting the variables with the best improvement in the accuracy. This procedure stops when the remaining variables doesn't enhance the accuracy of the model.  
+
+#### Backward
+- TO DESCRIBE
+
+#### Variance Thresholding  
+Select features based on their variances. A threshold, typically a low one, would be set so that any feature with a variance lower than that would be filtered out. Since this algorithm only looks at features without their outputs, it could be used to do feature selection on data related to unsupervised learning.
+
+#### Simulated Annealing  
+- TO DESCRIBE
+
 ### Installation:
 
 ```
