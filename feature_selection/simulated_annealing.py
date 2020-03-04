@@ -29,7 +29,7 @@ class simulated_annealing:
 
 	Examples:
 	---------
-	>>> from feature_selection-python import simulated_annealing
+	>>> from feature_selection import simulated_annealing
 	>>> X, y = make_friedman1(n_samples=100, n_features=10, random_state=123)
 	>>> model = LinearRegression()
 	>>> selector = simmulated_annealing(model, random_state=123)
@@ -57,4 +57,3 @@ class simulated_annealing:
 	"""
         Transforms data set to contain only significant features
         """
-
