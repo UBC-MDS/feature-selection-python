@@ -1,15 +1,22 @@
-class ForwardSelect:
-    """
+def forward_selection(scorer, X, y, min_features=1, max_features=5):
+    '''
     The Forward Selection is an algorithm used to select features.
     It starts as an empty model, and add the variable with the
-    highest improvement in the accuracy of the model. The process
-    is iteratively repeated and it stops when the remaining variables
-    doesn't improve the accuracy of the model.
+    best improvement in the model. The process is iteratively 
+    repeated and it stops when the remaining variables doesn't
+    improve the accuracy of the model.
 
     Parameters
     ----------
-    model : object
-        the model to use for fitting the data
+    scorer : object
+        function given by the user that returns the score. The
+        forward_selection function, will chose the smaller score 
+        from the scorer; in other words, the scorer should be 
+        giving following the idea: "the smaller, the better"
+    X : numpy.ndarray
+        training dataset
+    y : numpy.ndarray
+        test dataset
     min_features : int (default=None)
         number of minimum features to select
     max_features : int (default=10)
@@ -17,44 +24,56 @@ class ForwardSelect:
 
     Returns
     -------
-    features_ : numpy ndarray
-      Boolean array of selected features
+    numpy ndarray
+      Numeric array of selected features
 
     Examples
     --------
-    >>> from feature_selection import ForwardSelect
-	>>> lm = LinearRegression()
-	>>> selector = ForwardSelect(lm, train_data, test_data, max_features=5)
-	>>> my_selector = selector.fit(X, y)
-    >>> my_selector.features_
-    array([1, 2, 5, 6, 8])
-    """
+    >>> from sklearn.linear_model import LinearRegression
+    >>> from sklearn.datasets import make_friedman1
+    >>> data, target = make_friedman1(n_samples=200, n_features=15, random_state=0)
+    >>> def my_scorer_fn2(X, y):
+    >>>      lm = LinearRegression().fit(X, y)
+    >>>      return 1 - lm.score(X, y)
+    >>>
+    >>> forward_selection(my_scorer_fn, data, target, max_features=7)
+    array([0, 2, 3, 7, 9, 12, 13])
+    '''
+    ftr_ = []
+    no_ftr_ = []
+    scores_ = []
+    step_ = []
+    fn_score = []
+    no_ftr_ = list(range(0, X.shape[1]))
+    count = 1
+    bandera = False
+    X_new = []
 
-    def __init__(self, model,
-                 min_features=None,
-                 max_features=10):
-        """
-        Initialize a ForwardSelect object that use Forward algorithm
-        for Feature Selection.
-        """
-        self.max_features = max_features
-        self.min_features = min_features
-        self.model = model
+    for j in range(0, max_features):
+        for i in no_ftr_:
+            X_new = X[:, ftr_ + [i] ]
+            fn_score.append(scorer(X_new, y))
 
-    def fit(self, X, y):
-	    """
-        Trains ForwardSelect object to find significant features
-        on a data set.
+        # create data frame with the scores
+        data = {'number': no_ftr_, 'fn_score':fn_score}
+        df = pd.DataFrame(data)
 
-        Parameters:
-        -----------
-        X : numpy.ndarray
-            training dataset
-        y : numpy.ndarray
-            test dataset
-        """
+        best_one = np.max(df.fn_score) 
+        if len(ftr_) > 0:
+            if best_one < np.max(scores_):
+                if len(ftr_) > min_features:
 
-	def transform(self, X, y=None):
-	    """
-        Transforms data set to contain only significant features.
-        """
+                    bandera = True
+                    break            
+
+        x = df[df.fn_score == best_one].number
+        scores_.append(best_one)
+        ftr_.append(int(x))
+        step_.append(count)
+        no_ftr_.remove(int(x))
+
+        data = {}
+        fn_score = []
+        count += 1
+
+    return ftr_
