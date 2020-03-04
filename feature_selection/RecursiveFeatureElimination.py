@@ -39,13 +39,18 @@ def recursive_feature_elimination(scorer, X, y, n_features_to_select=None, step=
 
     Examples
     --------
-    >>> from sklearn import datasets
+    >>> from sklearn.datasets import make_friedman1
+    >>> from sklearn.linear_model import LinearRegression
     >>> from feature_selection import recursive_feature_elimination
-    >>> iris = datasets.load_iris()
-    >>> X, y = iris['data'], iris['target']
-    >>> scorer = lambda x : return 0 # Real implementation should be to fit model and return score
-    >>> recursive_feature_elimination(scorer, X, y, n_features_to_select=3)
-    array([ 5, 3, 1, 2])
+    >>>
+    >>> def scorer(X, y):
+    >>>     model = LinearRegression()
+    >>>     model.fit(X, y)
+    >>>     return X.columns[model.coef_.argmin()]
+    >>>
+    >>> X, y = make_friedman1(n_samples=200, n_features=10, random_state=10)
+    >>> result = recursive_feature_elimination(scorer, X, y, n_features_to_select=5)
+    array([0, 1, 3, 4, 9])
     """
 
     all_features = None
