@@ -11,7 +11,7 @@ You can contribute in many ways:
 
 ### Report Bugs
 
-Report bugs at https://github.com/UBC-MDS/feature-selection/issues.
+Report bugs at https://github.com/UBC-MDS/feature-selection-python/issues.
 
 If you are reporting a bug, please include:
 
@@ -37,7 +37,7 @@ articles, and such.
 
 ### Submit Feedback
 
-The best way to send feedback is to file an issue at https://github.com/UBC-MDS/feature-selection/issues.
+The best way to send feedback is to file an issue at https://github.com/UBC-MDS/feature-selection-python/issues.
 
 If you are proposing a feature:
 
@@ -50,18 +50,18 @@ If you are proposing a feature:
 
 Ready to contribute? Here's how to set up `feature-selection` for local development.
 
-1. Fork the `feature-selection` repo on GitHub.
+1. Fork the `feature-selection-python` repo on GitHub.
 
 2. Clone your fork locally:
 
 	```
-	git clone git@github.com:your_name_here/feature-selection.git
+	git clone git@github.com:your_name_here/feature-selection-python.git
 	```
 
 3. Install your local copy with Poetry, this is how you set up your fork for local development:
 
 	```
-	cd feature-selection/
+	cd feature-selection-python/
 	poetry install
 	```
 
@@ -97,24 +97,16 @@ Before you submit a pull request, check that it meets these guidelines:
 2. If the pull request adds functionality, the docs should be updated. Put
    your new functionality into a function with a docstring, and add the
    feature to the list in README.md.
-3. The pull request should work for Python 3.7 & 3.8. Check https://github.com/UBC-MDS/feature-selection/pulls and make sure that the tests pass for all supported Python versions.
-
-## Tips
-
-To run a subset of tests:
-
-```
-py.test tests.test_feature-selection
-```
+3. The pull request should work for Python 3.7 & 3.8. Check https://github.com/UBC-MDS/feature-selection-python/pulls and make sure that the tests pass for all supported Python versions.
 
 ## Deploying
 
 A reminder for the maintainers on how to deploy:
 
 - Ensure the following secrets are recorded on GitHub:
-	- CODECOV_TOKEN	
+	- CODECOV_TOKEN
 	- PYPI_USERNAME
- 	- PYPI_PASSWORD	
+ 	- PYPI_PASSWORD
 
  GitHub Actions should build and deploy to testPyPI when a pull request is merged into master.
 
