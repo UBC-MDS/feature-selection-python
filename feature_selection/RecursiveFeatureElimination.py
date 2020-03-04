@@ -1,3 +1,5 @@
+from functools import reduce
+
 import numpy as np
 import pandas as pd
 
@@ -32,9 +34,8 @@ def recursive_feature_elimination(scorer, X, y, n_features_to_select=None, step=
 
     Returns
     -------
-    array of shape [n_features]
-        List of ranked feature indices. That is, ranking_[i] corresponds to
-        the position of the ith-ranked feature of the original data.
+    array of shape [n_features_to_select]
+        List of column names or indices of non-eliminated features.
 
     Examples
     --------
@@ -58,10 +59,19 @@ def recursive_feature_elimination(scorer, X, y, n_features_to_select=None, step=
     eliminated_features = []
 
     for i in range(len(y)):
+        # Remove currently eliminated features
         features_to_try = all_features.drop(columns=eliminated_features)
+
+        # Get the next feature to remove
         feature_to_remove = scorer(features_to_try, y)
         eliminated_features.append(feature_to_remove)
+
+        # If we have our target number of features, stop.
         if len(eliminated_features) >= n_features_to_select:
             break
 
-    return eliminated_features
+    # Return a list of the features to keep
+    eliminated_features = set(eliminated_features)
+    kept_features = reduce(lambda acc, col: acc if col in eliminated_features else acc + [col],
+                           all_features.columns, [])
+    return list(kept_features)
