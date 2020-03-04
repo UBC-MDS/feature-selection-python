@@ -1,3 +1,4 @@
+import pandas as pd
 from sklearn.datasets import make_friedman1
 from sklearn.linear_model import LinearRegression
 
@@ -33,3 +34,11 @@ def test_friedman():
     X, y = make_friedman1(n_samples=200, n_features=10, random_state=10)
     result = recursive_feature_elimination(scorer, X, y, n_features_to_select=5)
     assert result == [0, 1, 3, 4, 9]
+
+
+def test_friedman_with_col_names():
+    X, y = make_friedman1(n_samples=200, n_features=10, random_state=10)
+    X = pd.DataFrame(X, columns=['zero', 'one', 'two', 'three', 'four',
+                                 'five', 'six', 'seven', 'eight', 'nine'])
+    result = recursive_feature_elimination(scorer, X, y, n_features_to_select=5)
+    assert result == ['zero', 'one', 'three', 'four', 'nine']

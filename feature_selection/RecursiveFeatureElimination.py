@@ -49,10 +49,8 @@ def recursive_feature_elimination(scorer, X, y, n_features_to_select=None):
     array([0, 1, 3, 4, 9])
     """
 
-    all_features = None
-
-    if type(X) == np.ndarray:
-        all_features = pd.DataFrame(X)
+    # Convert to Pandas DataFrame
+    all_features = pd.DataFrame(X) if type(X) == np.ndarray else X
 
     if type(X) != pd.DataFrame:
         assert TypeError('X must be a Pandas DataFrame')
