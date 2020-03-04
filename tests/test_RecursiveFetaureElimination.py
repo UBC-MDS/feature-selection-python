@@ -1,4 +1,6 @@
+import numpy as np
 import pandas as pd
+import pytest
 from sklearn.datasets import make_friedman1
 from sklearn.linear_model import LinearRegression
 
@@ -27,18 +29,69 @@ def scorer(X, y):
     return X.columns[model.coef_.argmin()]
 
 
-# This test creates a dataset that has 5 features that are are used to compute `y`.
-# The remaining 5 features are independent of `y`.
-# This test should select the 5 feature columns used to compute `y`.
-def test_friedman():
+def test_rfe_friedman():
+    """
+    This test creates a dataset that has 5 features that are are used to compute `y`.
+    The remaining 5 features are independent of `y`.
+    This test should select the 5 feature columns used to compute `y`.
+    """
     X, y = make_friedman1(n_samples=200, n_features=10, random_state=10)
     result = recursive_feature_elimination(scorer, X, y, n_features_to_select=5)
     assert result == [0, 1, 3, 4, 9]
 
 
-def test_friedman_with_col_names():
+def test_rfe_friedman_with_col_names():
+    """
+    Same as `test_friedman` but uses a DataFrame with column names
+    """
     X, y = make_friedman1(n_samples=200, n_features=10, random_state=10)
     X = pd.DataFrame(X, columns=['zero', 'one', 'two', 'three', 'four',
                                  'five', 'six', 'seven', 'eight', 'nine'])
     result = recursive_feature_elimination(scorer, X, y, n_features_to_select=5)
     assert result == ['zero', 'one', 'three', 'four', 'nine']
+
+
+def test_rfe_parameter_scorer():
+    other_params = [np.array([[0, 1], [2, 3]]), np.array([0, 0]), 1]
+
+    with pytest.raises(TypeError):
+        scorer = 10
+        recursive_feature_elimination(scorer, *other_params)
+
+    with pytest.raises(TypeError):
+        scorer = 'text'
+        recursive_feature_elimination(scorer, *other_params)
+
+    with pytest.raises(TypeError):
+        scorer = np.array([1, 2, 3])
+        recursive_feature_elimination(scorer, *other_params)
+
+
+def test_rfe_parameters():
+    two_d_array = np.array([[0, 1], [2, 3]])
+    three_d_array = np.array([[[0, 1], [2, 3]], [[4, 5], [6, 7]]])
+    other_params = [np.array([0, 0]), 1]
+
+    # X must be an np.array
+    with pytest.raises(TypeError):
+        recursive_feature_elimination(scorer, 'a string!', *other_params)
+
+    # X must not be 3-d
+    with pytest.raises(ValueError):
+        recursive_feature_elimination(scorer, three_d_array, *other_params)
+
+    # X must not be 1-d either
+    with pytest.raises(ValueError):
+        recursive_feature_elimination(scorer, np.array([0]), *other_params)
+
+    # y must be an np.array
+    with pytest.raises(TypeError):
+        recursive_feature_elimination(scorer, two_d_array, 'string!', 1)
+
+    # y must not be 3-d
+    with pytest.raises(ValueError):
+        recursive_feature_elimination(scorer, two_d_array, three_d_array, 1)
+
+    # X and y must have consistent number of samples
+    with pytest.raises(ValueError):
+        recursive_feature_elimination(scorer, two_d_array, np.array([0, 1, 2]), 1)

@@ -1,4 +1,5 @@
 from functools import reduce
+from inspect import isfunction
 
 import numpy as np
 import pandas as pd
@@ -15,8 +16,8 @@ def recursive_feature_elimination(scorer, X, y, n_features_to_select=None):
     Parameters
     ----------
     scorer : function
-        A custom user-supplied function that creates and fits model
-        and returns a score.
+        A custom user-supplied function that accepts X and y (as defined below)
+        as input and returns the index of the column with the lowest weight.
 
     X : array-like of shape (n_samples, n_features)
         Test samples
@@ -48,12 +49,30 @@ def recursive_feature_elimination(scorer, X, y, n_features_to_select=None):
     >>> result = recursive_feature_elimination(scorer, X, y, n_features_to_select=5)
     array([0, 1, 3, 4, 9])
     """
+    # `scorer` must be a function
+    if not isfunction(scorer):
+        raise TypeError('scorer must be a function.')
 
-    # Convert to Pandas DataFrame
+    # Must be a numpy array or Pandas DataFrame
+    if type(X) not in {pd.DataFrame, np.ndarray}:
+        raise TypeError('X must be a a NumPy array or a Pandas DataFrame.')
+
+    if len(X.shape) != 2:
+        raise ValueError('X must be a 2-d array.')
+
+    if type(y) not in {pd.DataFrame, np.ndarray}:
+        raise TypeError('y must be a a NumPy array or a Pandas DataFrame.')
+
+    if X.shape[0] != y.shape[0]:
+        raise ValueError(f'X and y have inconsistent numbers of samples: [{X.shape[0]}, {y.shape[0]}]')
+
+    # Convert to Pandas DataFrame so that we can keep track of columns
+    # by their column names. Pandas will assign column names 0, 1, etc.
+    # Array indices are no good because they keep changing as we remove columns.
     all_features = pd.DataFrame(X) if type(X) == np.ndarray else X
 
-    if type(X) != pd.DataFrame:
-        assert TypeError('X must be a Pandas DataFrame')
+    if n_features_to_select >= all_features.shape[1]:
+        assert ValueError('n_features_to_select must be less then the number of input features.')
 
     eliminated_features = []
 
