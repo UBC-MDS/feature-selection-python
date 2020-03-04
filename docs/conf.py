@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 #
-# feature-selection documentation build configuration file, created by
+# feature_selection documentation build configuration file, created by
 # sphinx-quickstart on Fri Jun  9 13:47:02 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -47,7 +47,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'feature-selection'
+project = u'feature_selection'
 copyright = u"2020, Ryan Homer"
 author = u"Ryan Homer"
 
@@ -128,8 +128,8 @@ latex_elements = {
 # (source start file, target name, title, author, documentclass
 # [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'feature-selection.tex',
-     u'feature-selection Documentation',
+    (master_doc, 'feature_selection.tex',
+     u'feature_selection Documentation',
      u'Ryan Homer', 'manual'),
 ]
 
@@ -139,8 +139,8 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'feature-selection',
-     u'feature-selection Documentation',
+    (master_doc, 'feature_selection',
+     u'feature_selection Documentation',
      [author], 1)
 ]
 
@@ -151,10 +151,10 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'feature-selection',
-     u'feature-selection Documentation',
+    (master_doc, 'feature_selection',
+     u'feature_selection Documentation',
      author,
-     'feature-selection',
+     'feature_selection',
      'One line description of project.',
      'Miscellaneous'),
 ]

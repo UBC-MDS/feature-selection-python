@@ -4,8 +4,8 @@ class simulated_annealing:
 
 	The algorithm randomly chooses a set of features, trains on them, scores the model.
 	Then the algorithm slightly modifies the chosen features randomly and tests to see
-	if the model improves. If there is improvement, the newer model is kept, if not the 
-	algorithm tests to see if the worse model is still kept based on a acceptance 
+	if the model improves. If there is improvement, the newer model is kept, if not the
+	algorithm tests to see if the worse model is still kept based on a acceptance
 	probability that decreases as iterations continue and if the model performs worse.
 
 	Parameters:
@@ -18,7 +18,7 @@ class simulated_annealing:
 
 	iterations : int (default=100)
 		Number of iterations
-	
+
 	random_state : int (default=None)
 		Random state of pseudo-random number generators
 
@@ -29,7 +29,7 @@ class simulated_annealing:
 
 	Examples:
 	---------
-	>>> from feature-selection-python import simulated_annealing
+	>>> from feature_selection-python import simulated_annealing
 	>>> X, y = make_friedman1(n_samples=100, n_features=10, random_state=123)
 	>>> model = LinearRegression()
 	>>> selector = simmulated_annealing(model, random_state=123)
@@ -43,14 +43,14 @@ class simulated_annealing:
 	def fit(self, X, y):
 	 """
         Trains simulated_annealing object to find significant features on a data set
-        
+
         Parameters:
         -----------
         X : np.array
             feature training dataset
         Y : np.array
-            target training dataset        
-        """	
+            target training dataset
+        """
 
 
 	def transform(self, X, y=None):
