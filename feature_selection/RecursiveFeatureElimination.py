@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 
-def recursive_feature_elimination(scorer, X, y, n_features_to_select=None, step=1, verbose=0):
+def recursive_feature_elimination(scorer, X, y, n_features_to_select=None):
     """
     Feature selector that implements recursive feature elimination
 
@@ -27,10 +27,6 @@ def recursive_feature_elimination(scorer, X, y, n_features_to_select=None, step=
     n_features_to_select : int or None (default=None)
         The number of features to be selected. If None, half the number
         of features are selected.
-
-    step : int or float, optional (default=1)
-        If step >= 1, then number of features to remove at each iteration.
-        If step < 1, percentage of features to remove at each iteration.
 
     Returns
     -------
