@@ -29,26 +29,27 @@ def scorer(X, y):
     return X.columns[model.coef_.argmin()]
 
 
-def test_rfe_friedman():
+def test_recursive_feature_elimination():
     """
     This test creates a dataset that has 5 features that are are used to compute `y`.
     The remaining 5 features are independent of `y`.
     This test should select the 5 feature columns used to compute `y`.
     """
     X, y = make_friedman1(n_samples=200, n_features=10, random_state=10)
-    result = recursive_feature_elimination(scorer, X, y, n_features_to_select=5)
-    assert result == [0, 1, 3, 4, 9]
+    features = recursive_feature_elimination(scorer, X, y, n_features_to_select=5)
+    assert features == [0, 1, 3, 4, 9]
 
+    # Test with n_features_to_select something other than 0.5 number of total features
+    # to ensure logic to stop feature elimination works correctly
+    features = recursive_feature_elimination(scorer, X, y, n_features_to_select=3)
+    assert len(features) == 3
 
-def test_rfe_friedman_with_col_names():
-    """
-    Same as `test_friedman` but uses a DataFrame with column names
-    """
+    # Retest with column names
     X, y = make_friedman1(n_samples=200, n_features=10, random_state=10)
     X = pd.DataFrame(X, columns=['zero', 'one', 'two', 'three', 'four',
                                  'five', 'six', 'seven', 'eight', 'nine'])
-    result = recursive_feature_elimination(scorer, X, y, n_features_to_select=5)
-    assert result == ['zero', 'one', 'three', 'four', 'nine']
+    features = recursive_feature_elimination(scorer, X, y, n_features_to_select=5)
+    assert features == ['zero', 'one', 'three', 'four', 'nine']
 
 
 def test_rfe_parameter_scorer():

@@ -85,7 +85,7 @@ def recursive_feature_elimination(scorer, X, y, n_features_to_select=None):
         eliminated_features.append(feature_to_remove)
 
         # If we have our target number of features, stop.
-        if len(eliminated_features) >= n_features_to_select:
+        if len(eliminated_features) + n_features_to_select >= X.shape[1]:
             break
 
     # Return a list of the features to keep
