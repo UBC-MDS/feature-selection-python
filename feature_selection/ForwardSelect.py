@@ -22,7 +22,7 @@ class ForwardSelect:
 
     Examples
     --------
-    >>> from feature_selection-python import ForwardSelect
+    >>> from feature_selection import ForwardSelect
 	>>> lm = LinearRegression()
 	>>> selector = ForwardSelect(lm, train_data, test_data, max_features=5)
 	>>> my_selector = selector.fit(X, y)
