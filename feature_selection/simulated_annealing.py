@@ -1,8 +1,14 @@
-def SimulatedAnnealing(scorer, X, y, c=1, iterations=100, bools=False):
+from inspect import isfunction
+
+import numpy as np
+import pandas as pd
+import random
+
+def simulated_annealing(scorer, X, y, c=1, iterations=100, bools=False):
     """
     Feature selector that performs simmulated annealing to select features.
 
-    The algorithm randomly chooses a set of features, trains on them, scores the model.
+    Algorithm randomly chooses a set of features, trains on them, scores the model.
     Then the algorithm slightly modifies the chosen features randomly and tests to see
     if the model improves. If there is improvement, the newer model is kept, if not the 
     algorithm tests to see if the worse model is still kept based on a acceptance 
@@ -11,7 +17,8 @@ def SimulatedAnnealing(scorer, X, y, c=1, iterations=100, bools=False):
     Parameters:
     -----------
     scorer : function
-        Function that returns score of dataset
+        A custom user-supplied function that accepts X and y (as defined below)
+        as input and returns the error of the datasets.
         
     X : np.array
         Feature training dataset
@@ -26,13 +33,44 @@ def SimulatedAnnealing(scorer, X, y, c=1, iterations=100, bools=False):
         Number of iterations
         
     bools : bool (default=False)
-        If true function returns array of boolean values
+        If true function returns array of boolean values instead of column indicies
 
     Returns:
     --------
     numpy.array
         Array of selected features indicies
+
+    Examples:
+    ---------
+    >>> from sklearn.datasets import make_friedman1
+    >>> from sklearn.linear_model import LinearRegression
+    >>> from feature_selection import simulated_annealing
+    >>>
+    >>> def scorer(X, y):
+    >>>     model = LinearRegression()
+    >>>     model.fit(X, y)
+    >>>     return 1-lr.score(X, y)
+    >>>
+    >>> X, y = make_friedman1(n_samples=200, n_features=10, random_state=10)
+    >>> simulated_annealing(scorer, X, y)
+    array([ 0,  1,  3,  4,  5,  6,  7,  9, 10])
     """
+    # `scorer` must be a function
+    if not isfunction(scorer):
+        raise TypeError('scorer must be a function.')
+
+    # Must be a numpy array or Pandas DataFrame
+    if type(X) not in {pd.DataFrame, np.ndarray}:
+        raise TypeError('X must be a a NumPy array or a Pandas DataFrame.')
+
+    if len(X.shape) != 2:
+        raise ValueError('X must be a 2-d array.')
+
+    if type(y) not in {pd.DataFrame, np.ndarray}:
+        raise TypeError('y must be a a NumPy array or a Pandas DataFrame.')
+
+    if X.shape[0] != y.shape[0]:
+        raise ValueError(f'X and y have inconsistent numbers of samples: [{X.shape[0]}, {y.shape[0]}]')
     
     # Set mutate percentage
     mutate = 0.05
@@ -65,6 +103,7 @@ def SimulatedAnnealing(scorer, X, y, c=1, iterations=100, bools=False):
                     ftr_old = ftr_new
                     score_old = score_new
 
+    # Return either feature indicies or booleans
     if bools:
         return ftr_old
     else:
