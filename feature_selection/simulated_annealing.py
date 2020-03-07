@@ -67,7 +67,7 @@ def simulated_annealing(scorer, X, y, c=1, iterations=100, bools=False):
         raise ValueError('X must be a 2-d array.')
 
     if type(y) not in {pd.DataFrame, np.ndarray}:
-        raise TypeError('y must be a a NumPy array or a Pandas DataFrame.')
+        raise TypeError('y must be a NumPy array or a Pandas DataFrame.')
 
     if X.shape[0] != y.shape[0]:
         raise ValueError(f'X and y have inconsistent numbers of samples: [{X.shape[0]}, {y.shape[0]}]')
