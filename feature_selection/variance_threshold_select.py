@@ -31,9 +31,9 @@ def variance_threshold_select(data, threshold = 0):
     is_data_np_array = isinstance(data, np.ndarray)
 
     if not (is_data_list or is_data_df or is_data_np_array):
-        raise Exception('Data is of an invalid type.')
+        raise TypeError('Data is of an invalid type.')
     elif (is_data_np_array or is_data_list) and len(np.array(data).shape) > 2:
-        raise Exception(
+        raise ValueError(
             'Data is of an invalid shape. ' \
             'Please only pass in data of less than two dimensions.'
         )
