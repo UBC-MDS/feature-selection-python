@@ -20,7 +20,7 @@ def recursive_feature_elimination(scorer, X, y, n_features_to_select=None):
         as input and returns the index of the column with the lowest weight.
 
     X : array-like of shape (n_samples, n_features)
-        Test samples
+        Training samples
 
     y : array-like of shape (n_samples,) or (n_samples, n_outputs)
         True values for X, used for training
