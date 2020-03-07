@@ -48,8 +48,8 @@ def test_recursive_feature_elimination():
     X, y = make_friedman1(n_samples=200, n_features=10, random_state=10)
     X = pd.DataFrame(X, columns=['zero', 'one', 'two', 'three', 'four',
                                  'five', 'six', 'seven', 'eight', 'nine'])
-    features = recursive_feature_elimination(scorer, X, y, n_features_to_select=5)
-    assert features == ['zero', 'one', 'three', 'four', 'nine']
+    features = recursive_feature_elimination(scorer, X, y, n_features_to_select=4)
+    assert features == ['zero', 'one', 'three', 'four']
 
 
 def test_rfe_parameter_scorer():
