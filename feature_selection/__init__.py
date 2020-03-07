@@ -1,3 +1,4 @@
 __version__ = '0.1.0'
+from feature_selection.simulated_annealing import simulated_annealing
 from feature_selection.recursive_feature_elimination import recursive_feature_elimination
 from feature_selection.variance_threshold_select import variance_threshold_select
