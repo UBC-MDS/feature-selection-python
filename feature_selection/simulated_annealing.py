@@ -23,7 +23,7 @@ def simulated_annealing(scorer, X, y, c=1, iterations=100, bools=False):
     X : np.array
         Feature training dataset
         
-    Y : np.array
+    y : np.array
         Target training dataset
 
     c : int (default=1)
