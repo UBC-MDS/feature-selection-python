@@ -36,8 +36,8 @@ def test_recursive_feature_elimination():
     This test should select the 5 feature columns used to compute `y`.
     """
     X, y = make_friedman1(n_samples=200, n_features=10, random_state=10)
-    features = recursive_feature_elimination(scorer, X, y, n_features_to_select=5)
-    assert features == [0, 1, 3, 4, 9]
+    features = recursive_feature_elimination(scorer, X, y, n_features_to_select=4)
+    assert features == [0, 1, 3, 4]
 
     # Test with n_features_to_select something other than 0.5 number of total features
     # to ensure logic to stop feature elimination works correctly
