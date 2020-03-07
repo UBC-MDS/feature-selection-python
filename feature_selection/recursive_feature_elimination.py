@@ -76,7 +76,7 @@ def recursive_feature_elimination(scorer, X, y, n_features_to_select=None):
 
     eliminated_features = []
 
-    for i in range(len(y)):
+    for i in range(1, X.shape[1]):
         # Remove currently eliminated features
         features_to_try = all_features.drop(columns=eliminated_features)
 
