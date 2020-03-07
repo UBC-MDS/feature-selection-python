@@ -61,7 +61,7 @@ def simulated_annealing(scorer, X, y, c=1, iterations=100, bools=False):
 
     # Must be a numpy array or Pandas DataFrame
     if type(X) not in {pd.DataFrame, np.ndarray}:
-        raise TypeError('X must be a a NumPy array or a Pandas DataFrame.')
+        raise TypeError('X must be a NumPy array or a Pandas DataFrame.')
 
     if len(X.shape) != 2:
         raise ValueError('X must be a 2-d array.')
