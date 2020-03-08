@@ -1,4 +1,9 @@
-def forward_selection(scorer, X, y, min_features=1, max_features=5):
+from inspect import isfunction
+import numpy as np
+import pandas as pd
+import random
+
+def forward_selection(scorer, X, y, min_features=1, max_features=10):
     '''
     The Forward Selection is an algorithm used to select features.
     It starts as an empty model, and add the variable with the
@@ -37,13 +42,39 @@ def forward_selection(scorer, X, y, min_features=1, max_features=5):
     >>> forward_selection(my_scorer_fn, data, target, max_features=7)
     array([0, 2, 3, 7, 9, 12, 13])
     '''
-    ftr_select = []
     scores = []
     fn_score = []
+    ftr_select = []
     ftr_no_select = list(range(0, X.shape[1]))
     flag = False
     X_new = []
 
+    # Tests
+    # 'scorer' must be a function
+    if not isfunction(scorer):
+        raise TypeError('scorer must be a function.')
+
+    # Must be a numpy array or Pandas DataFrame
+    if type(X) not in {pd.DataFrame, np.ndarray}:
+        raise TypeError('X must be a NumPy array or a Pandas DataFrame.')
+
+    if len(X.shape) != 2:
+        raise ValueError('X must be a 2-d array.')
+
+    if type(y) not in {pd.DataFrame, np.ndarray}:
+        raise TypeError('y must be a NumPy array or a Pandas DataFrame.')
+
+    if X.shape[0] != y.shape[0]:
+        raise ValueError(f'X and y have inconsistent numbers of samples: [{X.shape[0]}, {y.shape[0]}]')
+
+    if min_features > max_features:
+        raise TypeError('max_features should be greater or equal to min_features.')
+        
+    if min_features < 1:
+        raise TypeError('min_features should be a positive number.')
+
+
+    # The algorithm
     for j in range(0, max_features):
         for i in ftr_no_select:
             X_new = X[:, ftr_select + [i] ]
@@ -53,8 +84,8 @@ def forward_selection(scorer, X, y, min_features=1, max_features=5):
         data = {'number': ftr_no_select, 'fn_score':fn_score}
         df = pd.DataFrame(data)
 
-        best_one = np.max(df.fn_score) 
-        if (len(ftr_select) > 0 and best_one < np.max(scores) and len(ftr_select) > min_features):
+        best_one = np.min(df.fn_score) 
+        if (len(ftr_select) > 0 and best_one < np.max(scores) and len(ftr_select) >= min_features):
             flag = True
             break            
 
