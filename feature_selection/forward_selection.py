@@ -42,13 +42,6 @@ def forward_selection(scorer, X, y, min_features=1, max_features=10):
     >>> forward_selection(my_scorer_fn, data, target, max_features=7)
     array([0, 2, 3, 7, 9, 12, 13])
     '''
-    scores = []
-    fn_score = []
-    ftr_select = []
-    ftr_no_select = list(range(0, X.shape[1]))
-    flag = False
-    X_new = []
-
     # Tests
     # 'scorer' must be a function
     if not isfunction(scorer):
@@ -64,6 +57,9 @@ def forward_selection(scorer, X, y, min_features=1, max_features=10):
     if type(y) not in {pd.DataFrame, np.ndarray}:
         raise TypeError('y must be a NumPy array or a Pandas DataFrame.')
 
+    if len(y.shape) != 1:
+        raise ValueError('X must be a 1-d array.')
+
     if X.shape[0] != y.shape[0]:
         raise ValueError(f'X and y have inconsistent numbers of samples: [{X.shape[0]}, {y.shape[0]}]')
 
@@ -73,6 +69,13 @@ def forward_selection(scorer, X, y, min_features=1, max_features=10):
     if min_features < 1:
         raise TypeError('min_features should be a positive number.')
 
+    # Initial values
+    scores = []
+    fn_score = []
+    ftr_select = []
+    ftr_no_select = list(range(0, X.shape[1]))
+    flag = False
+    X_new = []
 
     # The algorithm
     for j in range(0, max_features):
