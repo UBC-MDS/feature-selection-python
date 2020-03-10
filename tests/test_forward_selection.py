@@ -32,7 +32,10 @@ def test_forward_selection():
     """
 
     data, target = make_friedman1(n_samples=200, n_features=10, random_state=10)
-    results = forward_selection(scorer, data, target, min_features = 4, max_features=5)
+    # Test feature selector working correctly
+    results = forward_selection(scorer, data, target, min_features = 4, max_features=4)
+    results = np.sort(results)
+    assert (results is np.array([0, 1, 3, 4]))
     
     # Test min/max number of features working correctly
     assert len(results) > 3
