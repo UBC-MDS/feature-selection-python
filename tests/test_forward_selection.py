@@ -35,11 +35,13 @@ def test_forward_selection():
     # Test feature selector working correctly
     results = forward_selection(scorer, data, target, min_features = 4, max_features=4)
     results = np.sort(results)
-    assert (results is np.array([0, 1, 3, 4]))
+    assert np.array_equal(results, np.array([0, 1, 3, 4]))
+    
     
     # Test min/max number of features working correctly
-    assert len(results) > 3
-    assert len(results) < 6
+    results = forward_selection(scorer, data, target, min_features = 3, max_features=6)
+    assert len(results) > 2
+    assert len(results) < 7
 
     # Test ouput is correct type
     assert type(results) is list
