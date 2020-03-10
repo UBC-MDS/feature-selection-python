@@ -86,7 +86,7 @@ def forward_selection(scorer, X, y, min_features=1, max_features=10):
         df = pd.DataFrame(data)
 
         best_one = np.min(df.fn_score) 
-        if (len(ftr_select) > 0 and best_one < np.min(scores) and len(ftr_select) >= min_features):
+        if (len(ftr_select) > 0 and best_one > np.min(scores) and len(ftr_select) >= min_features):
             break
 
         x = df[df.fn_score == best_one].number
