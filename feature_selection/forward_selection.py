@@ -1,7 +1,6 @@
 from inspect import isfunction
 import numpy as np
 import pandas as pd
-import random
 
 def forward_selection(scorer, X, y, min_features=1, max_features=10):
     '''
