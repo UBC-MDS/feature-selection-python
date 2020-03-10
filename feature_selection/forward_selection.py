@@ -34,13 +34,15 @@ def forward_selection(scorer, X, y, min_features=1, max_features=10):
     >>> from sklearn.linear_model import LinearRegression
     >>> from sklearn.datasets import make_friedman1
     >>> data, target = make_friedman1(n_samples=200, n_features=15, random_state=0)
+    >>>
     >>> def my_scorer_fn2(X, y):
     >>>      lm = LinearRegression().fit(X, y)
     >>>      return 1 - lm.score(X, y)
     >>>
-    >>> forward_selection(my_scorer_fn, data, target, max_features=7)
-    array([0, 2, 3, 7, 9, 12, 13])
+    >>> forward_selection(my_scorer_fn, data, target, 2, 7)
+    [3, 1, 0, 4]
     '''
+
     # Tests
     # 'scorer' must be a function
     if not isfunction(scorer):
@@ -74,6 +76,8 @@ def forward_selection(scorer, X, y, min_features=1, max_features=10):
     ftr_select = []
     ftr_no_select = list(range(0, X.shape[1]))
     X_new = []
+    flag_keep_running = True
+    flag_stop_running = False  
 
     # The algorithm
     for j in range(0, max_features):
@@ -86,7 +90,19 @@ def forward_selection(scorer, X, y, min_features=1, max_features=10):
         df = pd.DataFrame(data)
 
         best_one = np.min(df.fn_score) 
-        if (len(ftr_select) > 0 and best_one > np.min(scores) and len(ftr_select) >= min_features):
+        
+        # Stop if the score doesn't decrease at least by 5%
+        if (j >= 1):
+            if( ((np.min(scores) - best_one) / np.min(scores) ) <= 0.05):
+                flag_stop_running = True
+        
+        # Keep running the model until it reaches the minimum number of features
+        if (len(ftr_select) >= min_features):
+                flag_keep_running = False
+        
+        # break if the the algorithm got more than min_features and 
+        # additional features doesn't improve the result
+        if (flag_keep_running == False and flag_stop_running == True):
             break
 
         x = df[df.fn_score == best_one].number
