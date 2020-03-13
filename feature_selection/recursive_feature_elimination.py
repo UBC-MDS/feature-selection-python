@@ -46,7 +46,8 @@ def recursive_feature_elimination(scorer, X, y, n_features_to_select=None):
     >>>     return X.columns[model.coef_.argmin()]
     >>>
     >>> X, y = make_friedman1(n_samples=200, n_features=10, random_state=10)
-    >>> result = recursive_feature_elimination(scorer, X, y, n_features_to_select=5)
+    >>> result = recursive_feature_elimination(scorer, X, y,
+    >>>                                        n_features_to_select=5)
     array([0, 1, 3, 4, 9])
     """
     # `scorer` must be a function
@@ -64,15 +65,18 @@ def recursive_feature_elimination(scorer, X, y, n_features_to_select=None):
         raise TypeError('y must be a a NumPy array or a Pandas DataFrame.')
 
     if X.shape[0] != y.shape[0]:
-        raise ValueError(f'X and y have inconsistent numbers of samples: [{X.shape[0]}, {y.shape[0]}]')
+        raise ValueError(f'X and y have inconsistent numbers of samples: '
+                         '[{X.shape[0]}, {y.shape[0]}]')
 
     # Convert to Pandas DataFrame so that we can keep track of columns
     # by their column names. Pandas will assign column names 0, 1, etc.
-    # Array indices are no good because they keep changing as we remove columns.
+    # Array indices are no good because they keep changing as we remove
+    # columns.
     all_features = pd.DataFrame(X) if type(X) == np.ndarray else X
 
     if n_features_to_select >= all_features.shape[1]:
-        assert ValueError('n_features_to_select must be less then the number of input features.')
+        assert ValueError('n_features_to_select must be less then the number '
+                          'of input features.')
 
     eliminated_features = []
 
@@ -90,6 +94,9 @@ def recursive_feature_elimination(scorer, X, y, n_features_to_select=None):
 
     # Return a list of the features to keep
     eliminated_features = set(eliminated_features)
-    kept_features = reduce(lambda acc, col: acc if col in eliminated_features else acc + [col],
-                           all_features.columns, [])
+
+    kept_features = reduce(
+        lambda acc, col: acc if col in eliminated_features else acc + [col],
+        all_features.columns, [])
+
     return list(kept_features)
