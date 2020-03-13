@@ -46,6 +46,14 @@ def test_forward_selection():
     # Test ouput is correct type
     assert type(results) is list
     assert type(results[0]) is int
+
+    # test max_features should be greater or equal to min_features
+    with pytest.raises(TypeError):
+        forward_selection(scorer, data, target, min_features = 5, max_features=3)
+
+    # test min_features is positive, higher than zero
+    with pytest.raises(TypeError):
+        forward_selection(scorer, data, target, min_features = 0, max_features=5)
     
 
 def test_forward_selection_scorer():
