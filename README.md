@@ -4,7 +4,7 @@
 
 [![Documentation Status](https://readthedocs.org/projects/feature-selection/badge/?version=latest)](https://feature-selection.readthedocs.io/en/latest/?badge=latest)
 
-Feature selection for scikit-learn estimators
+Feature selection for machine learning models
 
 ### Overview:
 If you have encountered a database with a myriad number of features, which could be messy to work on, a good idea is to approach this problem by selecting only some of these features for your model. Feature selection will reduce complexity, reduce the time when training an algorithm, and improve the accuracy of your model (if we select them wisely). However, this is not a trivial task.
@@ -13,7 +13,7 @@ To help you out performing this task, we have created the **feature-selection** 
 
 If you are interested in a similar feature selection package for `R`, click [here](https://github.com/UBC-MDS/feature-selection-r).
 
-### Feature description:
+### Features:
 In this package, four functions are included to lead you with feature selection:
 
 - `forward_selection` - Function that use the Forward Selection algorithm to select the number of features in a model. This iterative algorithm starts as an empty model, and add the variable with the highest improve in the accuracy of the model. The process then is iteratively repeated selecting the variables with the best improvement in the accuracy. This procedure stops when the remaining variables doesn't enhance the accuracy of the model.  
@@ -42,12 +42,11 @@ Some of the above features already exsist within the Python ecosystem:
 pip install -i https://test.pypi.org/simple/ feature-selection
 ```
 
-### Features
-- TODO
-
 ### Dependencies
 
-- TODO
+- [python 3.7.5](https://www.python.org/downloads/release/python-375/)
+- [numpy 1.17.4](https://numpy.org/)
+- [pandas 0.25.3](https://pandas.pydata.org/getpandas.html)
 
 ### Usage
 
