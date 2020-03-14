@@ -1,4 +1,4 @@
-__version__ = '1.1.1'
+__version__ = '1.1.2'
 
 from feature_selection.forward_selection import forward_selection
 from feature_selection.simulated_annealing import simulated_annealing
