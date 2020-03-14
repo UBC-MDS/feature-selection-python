@@ -37,7 +37,7 @@ def forward_selection(scorer, X, y, min_features=1, max_features=10):
     >>> data, target = make_friedman1(n_samples=200, n_features=15,
     >>> random_state=0)
     >>> from feature_selection.forward_selection \
-    >>>      import forward_selection    
+    >>>      import forward_selection
     >>>
     >>> def my_scorer_fn2(X, y):
     >>>      lm = LinearRegression().fit(X, y)
