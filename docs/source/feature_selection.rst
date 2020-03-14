@@ -28,10 +28,10 @@ feature\_selection.simulated\_annealing module
    :undoc-members:
    :show-inheritance:
 
-feature\_selection.variance\_threshold\_select module
------------------------------------------------------
+feature\_selection.variance\_thresholding module
+------------------------------------------------
 
-.. automodule:: feature_selection.variance_threshold_select
+.. automodule:: feature_selection.variance_thresholding
    :members:
    :undoc-members:
    :show-inheritance:
