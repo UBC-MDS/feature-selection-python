@@ -52,15 +52,16 @@ pip install -i https://test.pypi.org/simple/ feature-selection
 
 To guide you with an example of how to use this package, we would use the [Friedman dataset](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_friedman1.html).
 
-Load libraries and [Friedman dataset](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_friedman1.html)
+Load libraries and dataset:
 ```
 from sklearn.linear_model import LinearRegression
 from sklearn.datasets import make_friedman1
-
 X, Y = make_friedman1(n_samples=200, n_features=15, random_state=0)
 ```
 
-- `forward_selection`
+Use of feature selection functions:
+
+- forward_selection
 ```
 # create a 'scorer'
 def scorer(X, y):
@@ -72,7 +73,7 @@ from feature_selection import forward_selection
 forward_selection(scorer, X, Y, 3, 6)
 ```
 
-- `recursive_feature_elimination`
+- recursive_feature_elimination
 ```
 # create a 'scorer'
 def scorer(X, y):
@@ -85,7 +86,7 @@ from feature_selection import recursive_feature_elimination
 recursive_feature_elimination(scorer, X, y, n_features_to_select=5)
 ```
 
-- `simulated_annealing`
+- simulated_annealing
 ```
 # create a 'scorer'
 def scorer(X, y):
@@ -97,7 +98,7 @@ from feature_selection import simulated_annealing
 simulated_annealing(scorer, X, y)
 ```
 
-- `simulated_annealing`
+- simulated_annealing
 For this function we would use another data:
 ```
 X = [[1,6,0,5],[1,2,4,5],[1,7,8,5]]
@@ -106,8 +107,6 @@ X = [[1,6,0,5],[1,2,4,5],[1,7,8,5]]
 feature_selection import variance_threshold_select
 variance_threshold_select(X, .09)
 ```
-
-
 
 ### Documentation
 The official documentation is hosted on Read the Docs: <https://feature-selection.readthedocs.io/en/latest/>
