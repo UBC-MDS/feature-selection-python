@@ -4,7 +4,8 @@ import pytest
 from sklearn.datasets import make_friedman1
 from sklearn.linear_model import LinearRegression
 
-from feature_selection.recursive_feature_elimination import recursive_feature_elimination
+from feature_selection.recursive_feature_elimination import (
+    recursive_feature_elimination)
 
 
 def scorer(X, y):
