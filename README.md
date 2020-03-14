@@ -101,7 +101,7 @@ simulated_annealing(scorer, X, y)
 ```
 output: array([ 1,  2,  3,  6,  7,  9, 10, 13])
 
-- simulated_annealing  
+- variance_threshold_select
 *note: for this function we would use different data.*
 ```
 X = [[1,6,0,5],[1,2,4,5],[1,7,8,5]]
