@@ -21,16 +21,16 @@ jobs:
         pip install poetry
         poetry install
     - name: Check style
-      run: poetry run flake8 --exclude=docs*
+      run: poetry run flake8 --exclude=docs __init__.py
     - name: Test with pytest
       run: |
         poetry run pytest --cov=./ --cov-report=xml
-    - name: Upload coverage to Codecov  
+    - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
         file: ./coverage.xml
         flags: unittests
         name: codecov-umbrella
-        yml: ./codecov.yml 
+        yml: ./codecov.yml
         fail_ci_if_error: true
