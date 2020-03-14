@@ -20,9 +20,9 @@ In this package, four functions are included to lead you with feature selection:
 
 - `recursive_feature_elimination` - Iteratively fit and score an estimator for greedy feature elimination.
 
-- `variance_threshold_select` - Select features based on their variances. A threshold, typically a low one, would be set so that any feature with a variance lower than that would be filtered out. Since this algorithm only looks at features without their outputs, it could be used to do feature selection on data related to unsupervised learning.
-
 - `simulated_annealing` - Perform simmulated annealing to select features: randomly choose a set of features and determine model performance. Then slightly modify the chosen features randomly and test to see if the modified feature list has improved model performance. If there is improvement, the newer model is kept, if not, a test is performed to determine if the worse model is still kept based on a acceptance probability that decreases as iterations continue and how worse the newer model performs. The process is repeated for a set number of iterations.
+
+- `variance_threshold_select` - Select features based on their variances. A threshold, typically a low one, would be set so that any feature with a variance lower than that would be filtered out. Since this algorithm only looks at features without their outputs, it could be used to do feature selection on data related to unsupervised learning.
 
 ### Existing Ecosystems:
 Some of the above features already exsist within the Python ecosystem:
@@ -50,7 +50,67 @@ pip install -i https://test.pypi.org/simple/ feature-selection
 
 ### Usage
 
-- TODO
+To guide you with an example of how to use this package, we would use the [Friedman dataset](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_friedman1.html).
+
+Load libraries and dataset:
+```
+from sklearn.linear_model import LinearRegression
+from sklearn.datasets import make_friedman1
+X, Y = make_friedman1(n_samples=200, n_features=15, random_state=0)
+```
+
+Use of feature selection functions:
+
+- forward_selection
+```
+# create a 'scorer'
+def scorer(X, y):
+    lm = LinearRegression().fit(X, y)
+    return 1 - lm.score(X, y)
+
+# use function
+from feature_selection.forward_selection import forward_selection
+forward_selection(scorer, X, Y, 3, 6)
+```
+output: [3, 1, 0, 4]
+
+- recursive_feature_elimination
+```
+# create a 'scorer'
+def scorer(X, y):
+    model = LinearRegression()
+    model.fit(X, y)
+    return X.columns[model.coef_.argmin()]
+
+# use function
+from feature_selection.recursive_feature_elimination import recursive_feature_elimination
+recursive_feature_elimination(scorer, X, y, n_features_to_select=5)
+```
+output: [0, 1, 2, 10, 14]
+
+- simulated_annealing
+```
+# create a 'scorer'
+def scorer(X, y):
+    lm = LinearRegression().fit(X, y)
+    return 1 - lm.score(X, y)
+
+# use function
+from feature_selection.simulated_annealing import simulated_annealing
+simulated_annealing(scorer, X, y)
+```
+output: array([ 1,  2,  3,  6,  7,  9, 10, 13])
+
+- simulated_annealing  
+*note: for this function we would use different data.*
+```
+X = [[1,6,0,5],[1,2,4,5],[1,7,8,5]]
+
+# use function
+feature_selection.variance_threshold_select import variance_threshold_select
+variance_threshold_select(X)
+```
+output: array([1, 2])
 
 ### Documentation
 The official documentation is hosted on Read the Docs: <https://feature-selection.readthedocs.io/en/latest/>
