@@ -69,11 +69,11 @@ def scorer(X, y):
     return 1 - lm.score(X, y)
 
 # use function
-from feature_selection import forward_selection
+from feature_selection.forward_selection import forward_selection
 forward_selection(scorer, X, Y, 3, 6)
 ```
 output: [3, 1, 0, 4]
-  
+
 - recursive_feature_elimination
 ```
 # create a 'scorer'
@@ -83,11 +83,11 @@ def scorer(X, y):
     return X.columns[model.coef_.argmin()]
 
 # use function
-from feature_selection import recursive_feature_elimination
+from feature_selection.recursive_feature_elimination import recursive_feature_elimination
 recursive_feature_elimination(scorer, X, y, n_features_to_select=5)
 ```
 output: [0, 1, 2, 10, 14]
-  
+
 - simulated_annealing
 ```
 # create a 'scorer'
@@ -96,18 +96,18 @@ def scorer(X, y):
     return 1 - lm.score(X, y)
 
 # use function
-from feature_selection import simulated_annealing
+from feature_selection.simulated_annealing import simulated_annealing
 simulated_annealing(scorer, X, y)
 ```
 output: array([ 1,  2,  3,  6,  7,  9, 10, 13])
-  
+
 - simulated_annealing  
 *note: for this function we would use different data.*
 ```
 X = [[1,6,0,5],[1,2,4,5],[1,7,8,5]]
 
 # use function
-feature_selection import variance_threshold_select
+feature_selection.variance_threshold_select import variance_threshold_select
 variance_threshold_select(X)
 ```
 output: array([1, 2])
