@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 import pytest
 
 from sklearn.datasets import make_friedman1
@@ -29,9 +28,11 @@ def scorer(X, y):
 
 def test_simulated_annealing():
     """
-    This test creates a dataset that has 5 features that are are used to compute `y`.
-    The remaining 5 features are independent of `y`.
-    This test should select the first 5 feature columns used to compute `y` more than the second set of 5 independent features.
+    This test creates a dataset that has 5 features that 
+    are are used to compute `y`. The remaining 5 features are 
+    independent of `y`. This test should select the first 5 
+    feature columns used to compute `y` more than the second set 
+    of 5 independent features.
     """
     X, y = make_friedman1(n_samples=200, n_features=10, random_state=10)
     N = 10
