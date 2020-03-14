@@ -3,7 +3,7 @@ import pytest
 from sklearn.datasets import make_friedman1
 from sklearn.linear_model import LinearRegression
 
-from feature_selection import forward_selection
+from feature_selection.forward_selection import forward_selection
 
 
 def scorer(X, y):
