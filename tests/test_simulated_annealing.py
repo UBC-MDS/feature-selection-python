@@ -59,6 +59,9 @@ def test_simulated_annealing():
 
 
 def test_sa_parameter_scorer():
+    """
+    Test for valid input of parameters in scorer
+    """
     other_params = [np.array([[0, 1], [2, 3]]), np.array([0, 0])]
 
     with pytest.raises(TypeError):
@@ -75,6 +78,9 @@ def test_sa_parameter_scorer():
 
 
 def test_sa_parameters():
+    """
+    Test for valid input of parameters in function input
+    """
     two_d_array = np.array([[0, 1], [2, 3]])
     three_d_array = np.array([[[0, 1], [2, 3]], [[4, 5], [6, 7]]])
     other_params = [np.array([0, 0])]
