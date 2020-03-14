@@ -1,4 +1,5 @@
-from feature_selection.variance_threshold_select import variance_threshold_select
+from feature_selection.variance_threshold_select import (
+    variance_threshold_select)
 import numpy as np
 from sklearn.datasets import load_iris
 import pandas as pd
