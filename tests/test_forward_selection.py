@@ -1,52 +1,72 @@
 import numpy as np
-import pandas as pd
 import pytest
 from sklearn.datasets import make_friedman1
 from sklearn.linear_model import LinearRegression
 
-from feature_selection import forward_selection
+from feature_selection.forward_selection import forward_selection
+
 
 def scorer(X, y):
-     """
-     Sample custom scorer that fits a model and returns
-     an appropriate score for the feature selection problem.
-     Parameters
-     ----------
-     X : array-like of shape (n_samples, n_features)
-         Test samples
-     y : array-like of shape (n_samples,) or (n_samples, n_outputs)
-         True values for X, used for training
-     Returns
-     -------
-     Error of scorer
-     """
-     lr = LinearRegression().fit(X, y)
-     return 1 - lr.score(X, y)
-
-
-def test_forward_selection():    
     """
-    This test creates a dataset that has 5 features that are are used to compute `y`.
-    The remaining 5 features are independent of `y`.
-    This test should select the first 5 feature columns used to compute `y` more than the second set of 5 independent features.
+    Sample custom scorer that fits a model and returns
+    an appropriate score for the feature selection problem.
+    Parameters
+    ----------
+    X : array-like of shape (n_samples, n_features)
+        Test samples
+    y : array-like of shape (n_samples,) or (n_samples, n_outputs)
+        True values for X, used for training
+    Returns
+    -------
+    Error of scorer
+    """
+    lr = LinearRegression().fit(X, y)
+    return 1 - lr.score(X, y)
+
+
+def test_forward_selection():
+    """
+    This test creates a dataset that has 5 features that
+    are are used to compute `y`. The remaining 5 features are
+    independent of `y`. This test should select the first 5
+    feature columns used to compute `y` more than the second set
+    of 5 independent features.
     """
 
-    data, target = make_friedman1(n_samples=200, n_features=10, random_state=10)
+    data, target = make_friedman1(
+        n_samples=200, n_features=10, random_state=10)
     # Test feature selector working correctly
-    results = forward_selection(scorer, data, target, min_features = 4, max_features=4)
+    results = forward_selection(
+        scorer,
+        data,
+        target,
+        min_features=4,
+        max_features=4)
     results = np.sort(results)
     assert np.array_equal(results, np.array([0, 1, 3, 4]))
-    
-    
+
     # Test min/max number of features working correctly
-    results = forward_selection(scorer, data, target, min_features = 3, max_features=6)
+    results = forward_selection(
+        scorer,
+        data,
+        target,
+        min_features=3,
+        max_features=6)
     assert len(results) > 2
     assert len(results) < 7
 
     # Test ouput is correct type
-    assert type(results) is list
-    assert type(results[0]) is int
-    
+    assert isinstance(results, list)
+    assert isinstance(results[0], int)
+
+    # test max_features should be greater or equal to min_features
+    with pytest.raises(TypeError):
+        forward_selection(scorer, data, target, min_features=5, max_features=3)
+
+    # test min_features is positive, higher than zero
+    with pytest.raises(TypeError):
+        forward_selection(scorer, data, target, min_features=0, max_features=5)
+
 
 def test_forward_selection_scorer():
     '''
