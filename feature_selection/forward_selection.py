@@ -34,7 +34,8 @@ def forward_selection(scorer, X, y, min_features=1, max_features=10):
     --------
     >>> from sklearn.linear_model import LinearRegression
     >>> from sklearn.datasets import make_friedman1
-    >>> data, target = make_friedman1(n_samples=200, n_features=15, random_state=0)
+    >>> data, target = make_friedman1(n_samples=200, n_features=15, 
+    >>> random_state=0)
     >>>
     >>> def my_scorer_fn2(X, y):
     >>>      lm = LinearRegression().fit(X, y)
@@ -64,7 +65,8 @@ def forward_selection(scorer, X, y, min_features=1, max_features=10):
 
     if X.shape[0] != y.shape[0]:
         raise ValueError(
-            f'X and y have inconsistent numbers of samples: [{X.shape[0]}, {y.shape[0]}]')
+            f'X and y have inconsistent numbers of samples: '
+            '[{X.shape[0]}, {y.shape[0]}]')
 
     if min_features > max_features:
         raise TypeError(
@@ -106,7 +108,7 @@ def forward_selection(scorer, X, y, min_features=1, max_features=10):
 
         # break if the the algorithm got more than min_features and
         # additional features doesn't improve the result
-        if (flag_keep_running == False and flag_stop_running == True):
+        if (not flag_keep_running and flag_stop_running):
             break
 
         x = df[df.fn_score == best_one].number
