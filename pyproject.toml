@@ -9,6 +9,10 @@ authors = [
   "Victor Cuspinera <vcuspinera@gmail.com>"
 ]
 license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/UBC-MDS/feature-selection-python"
+repository = "https://github.com/UBC-MDS/feature-selection-python"
+documentation = 'https://feature-selection.readthedocs.io'
 
 [tool.poetry.dependencies]
 python = "^3.7"
