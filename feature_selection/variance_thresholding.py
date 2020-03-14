@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 
-def variance_threshold_select(data, threshold=0):
+def variance_thresholding(data, threshold=0):
     """
     Select features above a certain threshold of variance
 
@@ -21,9 +21,9 @@ def variance_threshold_select(data, threshold=0):
 
     Examples
     --------
-    >>> from feature_selection import variance_threshold_select
+    >>> from feature_selection import variance_thresholding
     >>> X = [[1, 6, 0, 5], [1, 2, 4, 5], [1, 7, 8, 5]]
-    >>> variance_threshold_select(X)
+    >>> variance_thresholding(X)
     array([1, 2])
     """
 
