@@ -1,7 +1,8 @@
 import numpy as np
 import pandas as pd
 
-def variance_threshold_select(data, threshold = 0):
+
+def variance_threshold_select(data, threshold=0):
     """
     Select features above a certain threshold of variance
 
@@ -34,7 +35,7 @@ def variance_threshold_select(data, threshold = 0):
         raise TypeError('Data is of an invalid type.')
     elif (is_data_np_array or is_data_list) and len(np.array(data).shape) > 2:
         raise ValueError(
-            'Data is of an invalid shape. ' \
+            'Data is of an invalid shape. '
             'Please only pass in data of less than two dimensions.'
         )
 
