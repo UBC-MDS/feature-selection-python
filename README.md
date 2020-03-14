@@ -98,8 +98,8 @@ from feature_selection import simulated_annealing
 simulated_annealing(scorer, X, y)
 ```
 
-- simulated_annealing
-For this function we would use another data:
+- simulated_annealing  
+*note: for this function we would use different data.*
 ```
 X = [[1,6,0,5],[1,2,4,5],[1,7,8,5]]
 
