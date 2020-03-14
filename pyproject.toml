@@ -27,7 +27,7 @@ flake8 = "^3.7.9"
 python-semantic-release = "^4.10.0"
 
 [tool.semantic_release]
-version_variable = "feature-selection-python/__init__.py:__version__"
+version_variable = "feature_selection/__init__.py:__version__"
 version_source = "commit"
 upload_to_pypi = "false"
 patch_without_tag = "true"
