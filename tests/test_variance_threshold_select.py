@@ -29,6 +29,7 @@ def test_df_support():
     assert np.array_equal(result, [0, 1, 2, 3, 5])
 
 
+# Make sure the function throws errors for invalid input types
 def test_invalid_data_exception():
     with pytest.raises(TypeError):
         assert variance_thresholding(0)
@@ -37,6 +38,7 @@ def test_invalid_data_exception():
         assert variance_thresholding('123')
 
 
+# Make sure the function throws errors for an input more than 2d
 def test_invalid_data_dim_exception():
     with pytest.raises(ValueError):
         assert variance_thresholding(
