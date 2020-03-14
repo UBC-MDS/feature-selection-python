@@ -2,7 +2,7 @@
 
 ![](https://github.com/UBC-MDS/feature-selection-python/workflows/build/badge.svg) [![codecov](https://codecov.io/gh/UBC-MDS/feature-selection-python/branch/master/graph/badge.svg)](https://codecov.io/gh/UBC-MDS/feature-selection-python) ![Release](https://github.com/UBC-MDS/feature-selection-python/workflows/Release/badge.svg)
 
-[![Documentation Status](https://readthedocs.org/projects/feature-selection-mds/badge/?version=latest)](https://feature-selection-python-mds.readthedocs.io/en/latest/?badge=latest)
+[![Documentation Status](https://readthedocs.org/projects/feature-selection-python-mds/badge/?version=latest)](https://feature-selection-python-mds.readthedocs.io/en/latest/?badge=latest)
 
 Feature selection for machine learning models
 
