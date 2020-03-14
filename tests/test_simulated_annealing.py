@@ -4,7 +4,7 @@ import pytest
 from sklearn.datasets import make_friedman1
 from sklearn.linear_model import LinearRegression
 
-from feature_selection import simulated_annealing
+from feature_selection.simulated_annealing import simulated_annealing
 
 
 def scorer(X, y):
