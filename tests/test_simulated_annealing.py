@@ -7,6 +7,7 @@ from sklearn.linear_model import LinearRegression
 
 from feature_selection import simulated_annealing
 
+
 def scorer(X, y):
     """
     Sample custom scorer that fits a model and returns
@@ -23,7 +24,8 @@ def scorer(X, y):
     """
     model = LinearRegression()
     model.fit(X, y)
-    return 1-model.score(X, y)
+    return 1 - model.score(X, y)
+
 
 def test_simulated_annealing():
     """
@@ -41,18 +43,19 @@ def test_simulated_annealing():
     # Omit feature 2 because weaker strength and harder to detec
     assert results.sum(axis=0)[3] >= results.sum(axis=0)[8]
     assert results.sum(axis=0)[4] >= results.sum(axis=0)[9]
-    
+
     # Test output is non empty
     features = simulated_annealing(scorer, X, y)
     assert len(features) > 0
     features = simulated_annealing(scorer, X, y, bools=True)
     assert len(features) > 0
-    
+
     # Test outputs are correct types
     features = simulated_annealing(scorer, X, y)
-    assert type(features[0]) is np.int64
+    assert isinstance(features[0], np.int64)
     features = simulated_annealing(scorer, X, y, bools=True)
-    assert type(features[0]) is np.bool_
+    assert isinstance(features[0], np.bool_)
+
 
 def test_sa_parameter_scorer():
     other_params = [np.array([[0, 1], [2, 3]]), np.array([0, 0])]

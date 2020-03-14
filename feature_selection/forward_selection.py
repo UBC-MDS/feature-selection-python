@@ -2,11 +2,12 @@ from inspect import isfunction
 import numpy as np
 import pandas as pd
 
+
 def forward_selection(scorer, X, y, min_features=1, max_features=10):
     '''
     The Forward Selection is an algorithm used to select features.
     It starts as an empty model, and add the variable with the
-    best improvement in the model. The process is iteratively 
+    best improvement in the model. The process is iteratively
     repeated and it stops when the remaining variables doesn't
     improve the accuracy of the model.
 
@@ -62,11 +63,13 @@ def forward_selection(scorer, X, y, min_features=1, max_features=10):
         raise ValueError('X must be a 1-d array.')
 
     if X.shape[0] != y.shape[0]:
-        raise ValueError(f'X and y have inconsistent numbers of samples: [{X.shape[0]}, {y.shape[0]}]')
+        raise ValueError(
+            f'X and y have inconsistent numbers of samples: [{X.shape[0]}, {y.shape[0]}]')
 
     if min_features > max_features:
-        raise TypeError('max_features should be greater or equal to min_features.')
-        
+        raise TypeError(
+            'max_features should be greater or equal to min_features.')
+
     if min_features < 1:
         raise TypeError('min_features should be a positive number.')
 
@@ -77,30 +80,31 @@ def forward_selection(scorer, X, y, min_features=1, max_features=10):
     ftr_no_select = list(range(0, X.shape[1]))
     X_new = []
     flag_keep_running = True
-    flag_stop_running = False  
+    flag_stop_running = False
 
     # The algorithm
     for j in range(0, max_features):
         for i in ftr_no_select:
-            X_new = X[:, ftr_select + [i] ]
+            X_new = X[:, ftr_select + [i]]
             fn_score.append(scorer(X_new, y))
 
         # create data frame with the scores
-        data = {'number': ftr_no_select, 'fn_score':fn_score}
+        data = {'number': ftr_no_select, 'fn_score': fn_score}
         df = pd.DataFrame(data)
 
-        best_one = np.min(df.fn_score) 
-        
+        best_one = np.min(df.fn_score)
+
         # Stop if the score doesn't decrease at least by 5%
         if (j >= 1):
-            if( ((np.min(scores) - best_one) / np.min(scores) ) <= 0.05):
+            if(((np.min(scores) - best_one) / np.min(scores)) <= 0.05):
                 flag_stop_running = True
-        
-        # Keep running the model until it reaches the minimum number of features
+
+        # Keep running the model until it reaches the minimum number of
+        # features
         if (len(ftr_select) >= min_features):
-                flag_keep_running = False
-        
-        # break if the the algorithm got more than min_features and 
+            flag_keep_running = False
+
+        # break if the the algorithm got more than min_features and
         # additional features doesn't improve the result
         if (flag_keep_running == False and flag_stop_running == True):
             break

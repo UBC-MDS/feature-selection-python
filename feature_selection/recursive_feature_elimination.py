@@ -72,7 +72,7 @@ def recursive_feature_elimination(scorer, X, y, n_features_to_select=None):
     # by their column names. Pandas will assign column names 0, 1, etc.
     # Array indices are no good because they keep changing as we remove
     # columns.
-    all_features = pd.DataFrame(X) if type(X) == np.ndarray else X
+    all_features = pd.DataFrame(X) if isinstance(X, np.ndarray) else X
 
     if n_features_to_select >= all_features.shape[1]:
         assert ValueError('n_features_to_select must be less then the number '
