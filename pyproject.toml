@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "feature-selection"
-version = "0.1.0"
+version = "0.1.1"
 description = "Feature selection for scikit-learn estimators"
 authors = [
   "Ryan Homer <ryan.homer@alumni.ubc.ca>",
