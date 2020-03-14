@@ -22,7 +22,7 @@ In this package, four functions are included to lead you with feature selection:
 
 - `simulated_annealing` - Perform simmulated annealing to select features: randomly choose a set of features and determine model performance. Then slightly modify the chosen features randomly and test to see if the modified feature list has improved model performance. If there is improvement, the newer model is kept, if not, a test is performed to determine if the worse model is still kept based on a acceptance probability that decreases as iterations continue and how worse the newer model performs. The process is repeated for a set number of iterations.
 
-- `variance_threshold_select` - Select features based on their variances. A threshold, typically a low one, would be set so that any feature with a variance lower than that would be filtered out. Since this algorithm only looks at features without their outputs, it could be used to do feature selection on data related to unsupervised learning.
+- `variance_thresholding` - Select features based on their variances. A threshold, typically a low one, would be set so that any feature with a variance lower than that would be filtered out. Since this algorithm only looks at features without their outputs, it could be used to do feature selection on data related to unsupervised learning.
 
 ### Existing Ecosystems:
 Some of the above features already exsist within the Python ecosystem:
