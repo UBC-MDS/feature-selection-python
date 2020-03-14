@@ -64,6 +64,10 @@ def test_recursive_feature_elimination():
 
 
 def test_rfe_parameter_scorer():
+    """
+    Ensures that the custom user-supplied scorer function
+    is indeed a function.
+    """
     other_params = [np.array([[0, 1], [2, 3]]), np.array([0, 0]), 1]
 
     with pytest.raises(TypeError):
@@ -80,6 +84,9 @@ def test_rfe_parameter_scorer():
 
 
 def test_rfe_parameters():
+    """
+    Test parameters input into function for correct type/value
+    """
     two_d_array = np.array([[0, 1], [2, 3]])
     three_d_array = np.array([[[0, 1], [2, 3]], [[4, 5], [6, 7]]])
     other_params = [np.array([0, 0]), 1]
