@@ -28,6 +28,7 @@ def test_df_support():
     result = variance_threshold_select(iris_copy)
     assert np.array_equal(result, [0, 1, 2, 3, 5])
 
+
 # Make sure the function throws errors for invalid input types
 def test_invalid_data_exception():
     with pytest.raises(TypeError):
@@ -35,6 +36,7 @@ def test_invalid_data_exception():
 
     with pytest.raises(TypeError):
         assert variance_threshold_select('123')
+
 
 # Make sure the function throws errors for an input more than 2d
 def test_invalid_data_dim_exception():
