@@ -109,3 +109,10 @@ def test_rfe_parameters():
         recursive_feature_elimination(scorer,
                                       two_d_array,
                                       np.array([0, 1, 2]), 1)
+
+    # n_features_to_select can't be larger than number of features
+    with pytest.raises(ValueError):
+        recursive_feature_elimination(scorer,
+                                      two_d_array,
+                                      np.array([0, 1]),
+                                      n_features_to_select=10)
