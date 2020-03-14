@@ -71,8 +71,8 @@ def scorer(X, y):
 # use function
 from feature_selection.forward_selection import forward_selection
 forward_selection(scorer, X, Y, 3, 6)
+>>>output: [3, 1, 0, 4]
 ```
-output: [3, 1, 0, 4]
 
 - recursive_feature_elimination
 ```
@@ -85,8 +85,8 @@ def scorer(X, y):
 # use function
 from feature_selection.recursive_feature_elimination import recursive_feature_elimination
 recursive_feature_elimination(scorer, X, y, n_features_to_select=5)
+>>>output: [0, 1, 2, 10, 14]
 ```
-output: [0, 1, 2, 10, 14]
 
 - simulated_annealing
 ```
@@ -98,19 +98,20 @@ def scorer(X, y):
 # use function
 from feature_selection.simulated_annealing import simulated_annealing
 simulated_annealing(scorer, X, y)
+>>>output: array([ 1,  2,  3,  6,  7,  9, 10, 13])
 ```
-output: array([ 1,  2,  3,  6,  7,  9, 10, 13])
 
-- variance_threshold_select
-*note: for this function we would use different data.*
+- variance_thresholding
+
+*note: for this function we will use different data.*
 ```
 X = [[1,6,0,5],[1,2,4,5],[1,7,8,5]]
 
 # use function
-feature_selection.variance_threshold_select import variance_threshold_select
-variance_threshold_select(X)
+feature_selection.variance_thresholding import variance_thresholding
+variance_thresholding(X)
+>>>output: array([1, 2])
 ```
-output: array([1, 2])
 
 ### Documentation
 The official documentation is hosted on Read the Docs: <https://feature-selection.readthedocs.io/en/latest/>
