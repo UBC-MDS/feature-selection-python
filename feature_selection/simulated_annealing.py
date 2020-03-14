@@ -9,12 +9,12 @@ def simulated_annealing(scorer, X, y, c=1, iterations=100, bools=False):
     """
     Feature selector that performs simmulated annealing to select features.
 
-    Algorithm randomly chooses a set of features, trains on them, 
-    scores the model. Then the algorithm slightly modifies the chosen 
-    features randomly and tests to see if the model improves. If 
-    there is improvement, the newer model is kept, if not the algorithm 
+    Algorithm randomly chooses a set of features, trains on them,
+    scores the model. Then the algorithm slightly modifies the chosen
+    features randomly and tests to see if the model improves. If
+    there is improvement, the newer model is kept, if not the algorithm
     tests to see if the worse model is still kept based on a acceptance
-    probability that decreases as iterations continue and if the model 
+    probability that decreases as iterations continue and if the model
     performs worse.
 
     Parameters:
@@ -36,7 +36,7 @@ def simulated_annealing(scorer, X, y, c=1, iterations=100, bools=False):
         Number of iterations
 
     bools : bool (default=False)
-        If true function returns array of boolean values instead of 
+        If true function returns array of boolean values instead of
         column indicies
 
     Returns:
