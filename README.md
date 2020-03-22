@@ -56,7 +56,7 @@ Load libraries and dataset:
 ```python
 from sklearn.linear_model import LinearRegression
 from sklearn.datasets import make_friedman1
-X, Y = make_friedman1(n_samples=200, n_features=15, random_state=0)
+X, y = make_friedman1(n_samples=200, n_features=15, random_state=0)
 ```
 
 Use of feature selection functions:
@@ -70,8 +70,13 @@ def scorer(X, y):
     lm = LinearRegression().fit(X, y)
     return 1 - lm.score(X, y)
 
-forward_selection(scorer, X, Y, 3, 6)
->>>output: [3, 1, 0, 4]
+forward_selection(scorer, X, y, 3, 6)
+```
+
+Output:
+
+```python
+[3, 1, 0, 4]
 ```
 
 - `recursive_feature_elimination`
@@ -85,7 +90,12 @@ def scorer(X, y):
     return X.columns[model.coef_.argmin()]
 
 recursive_feature_elimination(scorer, X, y, n_features_to_select=5)
->>>output: [0, 1, 2, 10, 14]
+```
+
+Output:
+
+```python
+[0, 1, 2, 10, 14]
 ```
 
 - `simulated_annealing`
@@ -98,20 +108,30 @@ def scorer(X, y):
     return 1 - lm.score(X, y)
 
 simulated_annealing(scorer, X, y)
->>>output: array([ 1,  2,  3,  6,  7,  9, 10, 13])
+```
+
+Output:
+
+```python
+array([1,  2,  3,  6,  7,  9, 10, 13])
 ```
 
 - `variance_thresholding`
 
 *note: for this function we will use different data.*
 ```python
-feature_selection import variance_thresholding
+from feature_selection import variance_thresholding
 
 # Example data
 X = [[1,6,0,5],[1,2,4,5],[1,7,8,5]]
 
 variance_thresholding(X)
->>>output: array([1, 2])
+```
+
+Output:
+
+```python
+array([1, 2])
 ```
 
 ### Documentation
