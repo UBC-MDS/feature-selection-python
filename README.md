@@ -52,23 +52,27 @@ pip install -i https://test.pypi.org/simple/ feature-selection
 
 To guide you with an example of how to use this package, we would use the [Friedman dataset](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_friedman1.html).
 
-Load libraries and dataset:
+#### Load libraries and dataset
+
 ```python
 from sklearn.linear_model import LinearRegression
 from sklearn.datasets import make_friedman1
 X, y = make_friedman1(n_samples=200, n_features=15, random_state=0)
 ```
 
-Use of feature selection functions:
+#### Use of feature selection functions
 
 - `forward_selection`
+
 ```python
 from feature_selection import forward_selection
+
 
 # create a 'scorer'
 def scorer(X, y):
     lm = LinearRegression().fit(X, y)
     return 1 - lm.score(X, y)
+
 
 forward_selection(scorer, X, y, 3, 6)
 ```
@@ -80,14 +84,17 @@ Output:
 ```
 
 - `recursive_feature_elimination`
+
 ```python
 from feature_selection import recursive_feature_elimination
+
 
 # create a 'scorer'
 def scorer(X, y):
     model = LinearRegression()
     model.fit(X, y)
     return X.columns[model.coef_.argmin()]
+
 
 recursive_feature_elimination(scorer, X, y, n_features_to_select=5)
 ```
@@ -99,13 +106,16 @@ Output:
 ```
 
 - `simulated_annealing`
+
 ```python
 from feature_selection import simulated_annealing
+
 
 # create a 'scorer'
 def scorer(X, y):
     lm = LinearRegression().fit(X, y)
     return 1 - lm.score(X, y)
+
 
 simulated_annealing(scorer, X, y)
 ```
@@ -119,11 +129,12 @@ array([1,  2,  3,  6,  7,  9, 10, 13])
 - `variance_thresholding`
 
 *note: for this function we will use different data.*
+
 ```python
 from feature_selection import variance_thresholding
 
 # Example data
-X = [[1,6,0,5],[1,2,4,5],[1,7,8,5]]
+X = [[1, 6, 0, 5], [1, 2, 4, 5], [1, 7, 8, 5]]
 
 variance_thresholding(X)
 ```
