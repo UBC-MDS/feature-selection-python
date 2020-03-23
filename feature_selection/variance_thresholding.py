@@ -40,13 +40,21 @@ def variance_thresholding(data, threshold=0):
         )
 
     data_df = data if is_data_df else pd.DataFrame(data)
-
     variance_series = data_df.var(axis=0)
+
+    # Get all non-numerical columns because .var only keeps numerical
+    # columns and their variances
     non_num_columns = data_df.columns.difference(variance_series.index)
+
+    # Get all numerical columns with variances above the threshold
     selected_num_columns = variance_series[
         variance_series > threshold
     ].index
+
+    # Include all the non-numerical columns
     all_selected_columns = selected_num_columns.append(non_num_columns)
+
+    # Transform the selected columns into column indexes
     selected_column_indexes = np.array(list(map(
         lambda x: data_df.columns.get_loc(x),
         all_selected_columns
