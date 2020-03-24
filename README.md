@@ -48,7 +48,6 @@ pip install -i https://test.pypi.org/simple/ feature-selection
 - [python 3.7.5](https://www.python.org/downloads/release/python-375/)
 - [numpy 1.17.4](https://numpy.org/)
 - [pandas 0.25.3](https://pandas.pydata.org/getpandas.html)
-- [scikit-learn 0.22](https://scikit-learn.org/stable/install.html)
 
 ### Usage
 
