@@ -1,4 +1,5 @@
 from inspect import isfunction
+
 import numpy as np
 import pandas as pd
 
@@ -99,7 +100,7 @@ def forward_selection(scorer, X, y, min_features=1, max_features=10):
 
         # Stop if the score doesn't decrease at least by 5%
         if (j >= 1):
-            if(((np.min(scores) - best_one) / np.min(scores)) <= 0.05):
+            if (((np.min(scores) - best_one) / np.min(scores)) <= 0.05):
                 flag_stop_running = True
 
         # Keep running the model until it reaches the minimum number of
