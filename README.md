@@ -69,8 +69,10 @@ X, y = make_friedman1(n_samples=200, n_features=15, random_state=0)
     ```python
     from feature_selection import forward_selection
 
-
-    # create a 'scorer'
+    #
+    # User-defined 'scorer'
+    # that fits a LR model and returns the model error.
+    #
     def scorer(X, y):
         lm = LinearRegression().fit(X, y)
         return 1 - lm.score(X, y)
@@ -91,7 +93,11 @@ X, y = make_friedman1(n_samples=200, n_features=15, random_state=0)
     from feature_selection import recursive_feature_elimination
 
 
-    # create a 'scorer'
+    #
+    # User-defined 'scorer'
+    # that fits a LR model and returns the column
+    # with the lowest coefficient weighting.
+    #
     def scorer(X, y):
         model = LinearRegression()
         model.fit(X, y)
@@ -113,7 +119,10 @@ X, y = make_friedman1(n_samples=200, n_features=15, random_state=0)
     from feature_selection import simulated_annealing
 
 
-    # create a 'scorer'
+    #
+    # User-defined 'scorer'
+    # that fits a LR model and returns the model error.
+    #
     def scorer(X, y):
         lm = LinearRegression().fit(X, y)
         return 1 - lm.score(X, y)
@@ -130,13 +139,13 @@ X, y = make_friedman1(n_samples=200, n_features=15, random_state=0)
 
 - `variance_thresholding`
 
-    *note: for this function we will use different data.*
-
     ```python
     from feature_selection import variance_thresholding
 
     # Example data
-    X = [[1, 6, 0, 5], [1, 2, 4, 5], [1, 7, 8, 5]]
+    X = [[1, 6, 0, 5],
+         [1, 2, 4, 5],
+         [1, 7, 8, 5]]
 
     variance_thresholding(X)
     ```
