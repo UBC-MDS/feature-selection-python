@@ -74,7 +74,6 @@ def recursive_feature_elimination(scorer, X, y, n_features_to_select=None):
     # columns.
     all_features = pd.DataFrame(X) if isinstance(X, np.ndarray) else X
 
-    print(n_features_to_select, all_features.shape[1])
     if n_features_to_select >= all_features.shape[1]:
         raise ValueError('n_features_to_select must be less then the number '
                          'of input features.')
