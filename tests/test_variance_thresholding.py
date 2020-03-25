@@ -1,9 +1,9 @@
-from feature_selection.variance_thresholding import (
-    variance_thresholding)
 import numpy as np
-from sklearn.datasets import load_iris
 import pandas as pd
 import pytest
+from sklearn.datasets import load_iris
+
+from feature_selection import variance_thresholding
 
 iris = pd.DataFrame(load_iris().data)
 

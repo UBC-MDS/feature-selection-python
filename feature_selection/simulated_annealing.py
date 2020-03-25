@@ -1,8 +1,8 @@
+import random
 from inspect import isfunction
 
 import numpy as np
 import pandas as pd
-import random
 
 
 def simulated_annealing(scorer, X, y, c=1, iterations=100, bools=False):
