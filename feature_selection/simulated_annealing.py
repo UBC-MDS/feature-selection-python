@@ -17,8 +17,8 @@ def simulated_annealing(scorer, X, y, c=1, iterations=100, bools=False):
     probability that decreases as iterations continue and if the model
     performs worse.
 
-    Parameters:
-    -----------
+    Parameters
+    ----------
     scorer : function
         A custom user-supplied function that accepts X and y (as defined below)
         as input and returns the error of the datasets.
@@ -39,13 +39,13 @@ def simulated_annealing(scorer, X, y, c=1, iterations=100, bools=False):
         If true function returns array of boolean values instead of
         column indicies
 
-    Returns:
-    --------
+    Returns
+    -------
     numpy.array
         Array of selected features indicies
 
-    Examples:
-    ---------
+    Examples
+    --------
     >>> from sklearn.datasets import make_friedman1
     >>> from sklearn.linear_model import LinearRegression
     >>> from feature_selection import simulated_annealing
@@ -53,7 +53,7 @@ def simulated_annealing(scorer, X, y, c=1, iterations=100, bools=False):
     >>> def scorer(X, y):
     >>>     model = LinearRegression()
     >>>     model.fit(X, y)
-    >>>     return 1-lr.score(X, y)
+    >>>     return 1-model.score(X, y)
     >>>
     >>> X, y = make_friedman1(n_samples=200, n_features=10, random_state=10)
     >>> simulated_annealing(scorer, X, y)
