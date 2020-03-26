@@ -40,7 +40,7 @@ Some of the above features already exsist within the Python ecosystem:
 ### Installation
 
 ```bash
-pip install -i https://test.pypi.org/simple/ feature-selection
+pip install -i https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple feature-selection
 ```
 
 ### Dependencies
