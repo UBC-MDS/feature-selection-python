@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 
 
-def simulated_annealing(scorer, X, y, c=1, iterations=100, bools=False):
+def simulated_annealing(scorer, X, y, c=1, iterations=100, bools=False, random_state=None):
     """
     Feature selector that performs simmulated annealing to select features.
 
@@ -38,6 +38,9 @@ def simulated_annealing(scorer, X, y, c=1, iterations=100, bools=False):
     bools : bool (default=False)
         If true function returns array of boolean values instead of
         column indicies
+
+    random_state : int (default=None)
+        Seed for random number generators
 
     Returns
     -------
@@ -80,6 +83,10 @@ def simulated_annealing(scorer, X, y, c=1, iterations=100, bools=False):
 
     # Set mutate percentage
     mutate = 0.05
+
+    # Set random state
+    np.random.seed(random_state)
+    random.seed(random_state)
 
     # Obtain initial array of randomly selected features
     ftr_all = np.arange(0, X.shape[1])
