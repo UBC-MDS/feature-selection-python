@@ -121,6 +121,10 @@ def simulated_annealing(scorer, X, y, c=1, iterations=100, bools=False, random_s
                     ftr_old = ftr_new
                     score_old = score_new
 
+    # Reset random state
+    np.random.seed(None)
+    random.seed(None)
+
     # Return either feature indicies or booleans
     if bools:
         return ftr_old
